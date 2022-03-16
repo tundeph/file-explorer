@@ -7,6 +7,7 @@ import File from "../../components/File"
 import Folder from "../../components/Folder"
 import Notification from "../../components/Notification"
 import Search from "./Search"
+import SearchBar from "../../components/SearchBar"
 
 //styles
 import { Container, SearchContainer, Title } from "../styles"
@@ -19,7 +20,6 @@ import {
   dateDescending,
   flattenArray,
 } from "../../helper/helper"
-import SearchBar from "../../components/SearchBar"
 
 const options: Options = [
   {
@@ -45,6 +45,7 @@ const Display = () => {
   const [sorted, setSorted] = useState<any[]>(options)
   const [filterText, setFilterText] = useState<string>("")
 
+  //function to sort files
   const handleSortBy = (e: React.ChangeEvent<HTMLInputElement>) => {
     const chosen = options
       .map((option) => {
@@ -57,11 +58,11 @@ const Display = () => {
         }
       })
       .filter((option) => option.value === e.target.value)
-
     e.target.checked ? data?.sort(chosen[0].asc) : data?.sort(chosen[0].desc)
     setSorted(chosen)
   }
 
+  //function to filter files by with the input form
   const filteredData = (data: any[], filterText: any) => {
     if (filterText.length > 0) {
       return flattenArray(data).filter((d: { name: string }) =>
@@ -80,15 +81,11 @@ const Display = () => {
 
       {data && (
         <>
-          <div>
-            <SearchContainer>
-              <Search options={options} handleSortBy={handleSortBy} />
-              <SearchBar
-                filterText={filterText}
-                setFilterText={setFilterText}
-              />
-            </SearchContainer>
-          </div>
+          <SearchContainer>
+            <Search options={options} handleSortBy={handleSortBy} />
+            <SearchBar filterText={filterText} setFilterText={setFilterText} />
+          </SearchContainer>
+
           {filteredData(data, filterText).map((eachData: any, i: number) => (
             <React.Fragment key={i}>
               {eachData.type === "folder" ? (
