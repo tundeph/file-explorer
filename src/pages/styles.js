@@ -13,7 +13,7 @@ const iconProps = css`
 `
 
 const FormContainerProps = css`
-  flex-grow: 1;
+  flex-grow: 2;
 
   input,
   button {
@@ -56,8 +56,21 @@ export const FolderContainer = styled.div`
 export const SearchContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 40px;
+  flex-direction: row;
+  gap: 10px;
+
+  h3 {
+    margin: 0;
+  }
+`
+
+export const SortContainer = styled.div`
+  display: flex;
+  flex-grow: 1;
+  flex-direction: row;
+  gap: 10px;
+  padding: 0px 20px;
+  min-width: 200px;
 `
 
 export const FormContainer = styled.div`
