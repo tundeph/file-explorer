@@ -1,10 +1,13 @@
 //types
 import { OptionsProps } from "../../models/Display.types"
 
+//styles
+import { SortContainer } from "../styles"
+
 const Search = ({ options, handleSortBy }: OptionsProps) => {
   return (
-    <div>
-      Sort By -
+    <SortContainer>
+      <h3> Sort: </h3>
       {options &&
         options.map((option, i) => {
           return (
@@ -21,7 +24,7 @@ const Search = ({ options, handleSortBy }: OptionsProps) => {
             </label>
           )
         })}
-    </div>
+    </SortContainer>
   )
 }
 
