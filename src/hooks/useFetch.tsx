@@ -1,11 +1,5 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 
-export interface dataProps {
-  type: string
-  name: string
-  added?: string
-  files?: {}
-}
 export type setErrorProps = string | null
 export type setIsPendingProps = boolean
 
