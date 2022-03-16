@@ -1,9 +1,3 @@
-import { visitLexicalEnvironment } from "typescript"
-// import lodash from "lodash-es"
-// import deepdash from "deepdash-es"
-// import { filterDeep } from "deepdash-es/standalone"
-// const _ = deepdash(lodash)
-
 const sortFunction = (a, b) => {
   if (a > b) return 1
   if (a < b) return -1
