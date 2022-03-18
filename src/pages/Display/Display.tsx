@@ -21,7 +21,7 @@ import {
   flattenArray,
 } from "../../helper/helper"
 
-const options: Options = [
+export const options: Options = [
   {
     title: "Name",
     value: "name",
