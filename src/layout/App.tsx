@@ -1,10 +1,11 @@
 import Display from "../pages/Display/Display"
+import { ExplorerContextProvider } from "../context/ExplorerContext"
 
 function App() {
   return (
-    <div className="App">
+    <ExplorerContextProvider>
       <Display />
-    </div>
+    </ExplorerContextProvider>
   )
 }
 

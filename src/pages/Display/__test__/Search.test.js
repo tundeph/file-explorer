@@ -10,7 +10,7 @@ describe("Search Component Tests", () => {
     expect(selectElement).toBeTruthy()
   })
 
-  it("should click only one checkbox per time", () => {
+  it("should click only one checkbox to sort per time", () => {
     render(<Search options={options} handleSortBy={jest.fn} />)
     const nameSelectElement = screen.getByTestId("name")
     const addedSelectElement = screen.getByTestId("added")

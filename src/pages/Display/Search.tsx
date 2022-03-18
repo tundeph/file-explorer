@@ -15,7 +15,7 @@ const Search = ({ options, handleSortBy }: OptionsProps) => {
               {option.title}
               <input
                 type="checkbox"
-                name="sort"
+                // name="sort"
                 value={option.value}
                 checked={option.checked}
                 onChange={handleSortBy}

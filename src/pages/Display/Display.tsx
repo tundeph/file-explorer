@@ -1,5 +1,6 @@
-import React, { useState } from "react"
-import { useFetch } from "../../hooks/useFetch"
+import React, { useState, useContext } from "react"
+
+import { ExplorerContext } from "../../context/ExplorerContext"
 import { Options } from "../../models/Display.types"
 
 //components
@@ -39,7 +40,7 @@ export const options: Options = [
 ]
 
 const Display = () => {
-  const { data, isPending, error } = useFetch("http://localhost:3000/data")
+  const { data, isPending, error, dispatch } = useContext(ExplorerContext)
 
   //states
   const [sorted, setSorted] = useState<any[]>(options)
@@ -47,26 +48,26 @@ const Display = () => {
 
   //function to sort files
   const handleSortBy = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const chosen = options
-      .map((option) => {
-        if (option.value === e.target.value) {
-          option.checked = e.target.checked
-          return option
-        } else {
-          option.checked = false
-          return option
-        }
-      })
-      .filter((option) => option.value === e.target.value)
-    e.target.checked ? data?.sort(chosen[0].asc) : data?.sort(chosen[0].desc)
+    const chosen = options.map((option) => {
+      if (option.value === e.target.value) {
+        option.checked = e.target.checked
+        option.checked ? data?.sort(option.asc) : data?.sort(option.desc)
+        return option
+      } else {
+        option.checked = false
+        return option
+      }
+    })
     setSorted(chosen)
+    dispatch({ type: "GET_DATA", payload: data })
   }
 
   //function to filter files by with the input form
+
   const filteredData = (data: any[], filterText: any) => {
-    if (filterText.length > 0) {
+    if (filterText.trim().length > 0) {
       return flattenArray(data).filter((d: { name: string }) =>
-        d.name.toLowerCase().includes(filterText.toLocaleLowerCase())
+        d.name.toLowerCase().includes(filterText.trim().toLocaleLowerCase())
       )
     } else {
       return data
@@ -82,7 +83,7 @@ const Display = () => {
       {data && (
         <>
           <SearchContainer>
-            <Search options={options} handleSortBy={handleSortBy} />
+            <Search options={sorted} handleSortBy={handleSortBy} />
             <SearchBar filterText={filterText} setFilterText={setFilterText} />
           </SearchContainer>
 
