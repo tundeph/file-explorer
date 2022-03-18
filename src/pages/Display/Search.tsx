@@ -19,7 +19,7 @@ const Search = ({ options, handleSortBy }: OptionsProps) => {
                 value={option.value}
                 checked={option.checked}
                 onChange={handleSortBy}
-                data-testid="checkbox"
+                data-testid={option.value}
               />
             </label>
           )
