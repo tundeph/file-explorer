@@ -24,3 +24,7 @@ export interface SearchBarProps {
 }
 
 export type Options = any[]
+
+export interface ExplorerContextProviderProps {
+  children: React.ReactNode
+}
