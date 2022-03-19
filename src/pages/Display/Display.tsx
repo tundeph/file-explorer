@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react"
 
 import { ExplorerContext } from "../../context/ExplorerContext"
-import { Options } from "../../models/Display.types"
+import { OptionsArrayProps } from "../../models/Display.types"
 
 //components
 import File from "../../components/File"
@@ -22,33 +22,32 @@ import {
   flattenArray,
 } from "../../helper/helper"
 
-export const options: Options = [
-  {
+export const options = {
+  name: {
     title: "Name",
     value: "name",
     asc: nameAscending,
     desc: nameDescending,
     checked: false,
   },
-  {
+  added: {
     title: "Date",
     value: "added",
     asc: dateAscending,
     desc: dateDescending,
     checked: false,
   },
-]
+}
 
 const Display = () => {
   const { data, isPending, error, dispatch } = useContext(ExplorerContext)
 
   //states
-  const [sorted, setSorted] = useState<any[]>(options)
   const [filterText, setFilterText] = useState<string>("")
 
   //function to sort files
   const handleSortBy = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const chosen = options.map((option) => {
+    const chosen = Object.values(options).map((option) => {
       if (option.value === e.target.value) {
         option.checked = e.target.checked
         option.checked ? data?.sort(option.asc) : data?.sort(option.desc)
@@ -58,12 +57,11 @@ const Display = () => {
         return option
       }
     })
-    setSorted(chosen)
+
     dispatch({ type: "GET_DATA", payload: data })
   }
 
   //function to filter files by with the input form
-
   const filteredData = (data: any[], filterText: any) => {
     if (filterText.trim().length > 0) {
       return flattenArray(data).filter((d: { name: string }) =>
@@ -83,7 +81,7 @@ const Display = () => {
       {data && (
         <>
           <SearchContainer>
-            <Search options={sorted} handleSortBy={handleSortBy} />
+            <Search options={options} handleSortBy={handleSortBy} />
             <SearchBar filterText={filterText} setFilterText={setFilterText} />
           </SearchContainer>
 

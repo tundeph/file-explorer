@@ -9,7 +9,7 @@ const Search = ({ options, handleSortBy }: OptionsProps) => {
     <SortContainer>
       <h3> Sort: </h3>
       {options &&
-        options.map((option, i) => {
+        Object.values(options).map((option, i) => {
           return (
             <label htmlFor={option.title} key={i}>
               {option.title}
