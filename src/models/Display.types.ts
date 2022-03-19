@@ -1,4 +1,4 @@
-import { FunctionOrConstructorTypeNode } from "typescript"
+//import { FunctionOrConstructorTypeNode } from "typescript"
 
 export interface FileProps {
   value: { type: string; name: string; added: string }
@@ -14,8 +14,41 @@ export interface FolderProps {
 }
 
 export interface OptionsProps {
-  options: any[]
+  options: {
+    name: {
+      title: string
+      value: string
+      asc: () => void
+      desc: () => void
+      checked: boolean
+    }
+    added: {
+      title: string
+      value: string
+      asc: () => void
+      desc: () => void
+      checked: boolean
+    }
+  }
+
   handleSortBy: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+export interface OptionsArrayProps {
+  name: {
+    title: string
+    value: string
+    asc: () => void
+    desc: () => void
+    checked: boolean
+  }
+  added: {
+    title: string
+    value: string
+    asc: () => void
+    desc: () => void
+    checked: boolean
+  }
 }
 
 export interface SearchBarProps {
