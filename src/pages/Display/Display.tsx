@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react"
 
 import { ExplorerContext } from "../../context/ExplorerContext"
-import { OptionsArrayProps } from "../../models/Display.types"
 
 //components
 import File from "../../components/File"
@@ -61,11 +60,11 @@ const Display = () => {
     dispatch({ type: "GET_DATA", payload: data })
   }
 
-  //function to filter files by with the input form
+  //function to filter files with the input form
   const filteredData = (data: any[], filterText: any) => {
     if (filterText.trim().length > 0) {
       return flattenArray(data).filter((d: { name: string }) =>
-        d.name.toLowerCase().includes(filterText.trim().toLocaleLowerCase())
+        d.name.toLowerCase().includes(filterText.trim().toLowerCase())
       )
     } else {
       return data
