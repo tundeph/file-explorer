@@ -35,7 +35,6 @@ export const ExplorerContextProvider = ({ children }) => {
         dispatch({ type: "GET_DATA", payload: data })
       } catch (err) {
         dispatch({ type: "IS_ERROR" })
-        console.log("err: ", err)
       }
     }
     fetchData()
